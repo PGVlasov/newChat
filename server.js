@@ -47,20 +47,20 @@ io.on("connection", (socket) => {
     shareRoomsList();
   });
 
-  socket.on(ACTIONS.NEW_USER, ({ room, userName }) => {
-    const { room: roomID } = room;
-
+  socket.on(ACTIONS.NEW_USER, (msg) => {
+    const roomID = msg.roomID;
+    const userName = msg.data.userName.authorName;
+    const userID = msg.data.userName.authorId;
     const clients = Array.from(io.sockets.adapter.rooms.get(roomID) || []);
 
     const users = [];
     users.push(userName);
-    io.to(clients).emit(ACTIONS.NEW_USER_RESPONSE, users);
+    io.to(clients).emit(ACTIONS.NEW_USER_RESPONSE, { userName, userID });
   });
 
   socket.on(ACTIONS.MESSAGE, (msg) => {
     //gets room id
     const roomID = msg.roomID;
-    console.log(msg);
 
     const clients = Array.from(io.sockets.adapter.rooms.get(roomID) || []);
     //sens message only to clients from this room id

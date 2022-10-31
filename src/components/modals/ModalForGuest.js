@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { v4 } from "uuid";
 
 export const MyModalForGuest = () => {
   const [show, setShow] = useState(true);
@@ -11,9 +12,10 @@ export const MyModalForGuest = () => {
   const onChangeHandler = (e) => {
     setUserName(e.target.value);
   };
-
+  let authorId = v4();
   const sendMessage = () => {
     sessionStorage.setItem("userName", userName);
+    sessionStorage.setItem("authorId", authorId);
     setShow(false);
     window.location.reload();
   };

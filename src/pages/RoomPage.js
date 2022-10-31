@@ -19,16 +19,29 @@ export const RoomPage = () => {
 
   let author = {
     authorName: sessionStorage.getItem("userName"),
-    authorId: v4(),
+    authorId: sessionStorage.getItem("authorId"),
   };
 
   useEffect(() => {
     socket.emit(ACTIONS.JOIN, { room: roomID.id });
-    socket.emit(ACTIONS.NEW_USER, {
-      room: roomID.id,
-      userName: author.authorName,
-    });
+    // let data = {
+    //   roomID: roomID.id,
+    //   userName: author,
+    // };
+    // socket.emit(ACTIONS.NEW_USER, {
+    //   data,
+    // });
     // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    let data = {
+      roomID: roomID.id,
+      userName: author,
+    };
+    socket.emit(ACTIONS.NEW_USER, {
+      data,
+    });
   }, []);
 
   useEffect(() => {
@@ -39,8 +52,10 @@ export const RoomPage = () => {
 
   useEffect(() => {
     socket.on(ACTIONS.NEW_USER_RESPONSE, (data) => {
-      setUsers([...users, data]);
-      console.log(data);
+      if (!users.includes(data.userID) && data.userID !== null) {
+        setUsers([...users, data.userName]);
+      }
+      console.log(data.userID);
     });
   }, [users]);
 
@@ -50,6 +65,8 @@ export const RoomPage = () => {
       sendMessage();
     }
   };
+  let arr = [1, 2];
+  console.log("TEST", !arr.includes(1));
 
   const sendMessage = async () => {
     let day = new Date();

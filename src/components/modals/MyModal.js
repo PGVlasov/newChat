@@ -22,8 +22,11 @@ export const MyModal = () => {
     }
   };
 
+  let authorId = v4();
+
   const sendMessage = () => {
     sessionStorage.setItem("userName", userName);
+    sessionStorage.setItem("authorId", authorId);
     history(`/room/${v4()}`);
   };
   return (
