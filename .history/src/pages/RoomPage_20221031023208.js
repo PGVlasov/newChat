@@ -40,7 +40,6 @@ export const RoomPage = () => {
   useEffect(() => {
     socket.on(ACTIONS.NEW_USER_RESPONSE, (data) => {
       setUsers([...users, data]);
-      console.log(data);
     });
   }, [users]);
 
@@ -76,8 +75,6 @@ export const RoomPage = () => {
 
     setValue("");
   };
-
-  console.log(users);
 
   if (sessionStorage.getItem("userName") === null) return <MyModalForGuest />;
 
@@ -118,7 +115,7 @@ export const RoomPage = () => {
               value={value}
               onChangeHandler={onChangeHandler}
             />
-            <ChatBar users={users} />
+            <ChatBar />
             <Button onClick={() => setVideoStarted(true)}>
               Начать видеочат
             </Button>

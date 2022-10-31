@@ -17,7 +17,7 @@ export const ChatBar = ({ users }) => {
         <ListGroup variant="flush" style={{ width: "50%", margin: "1rem" }}>
           {users.map((user) => (
             <ListGroup.Item action variant="success" key={Math.random()}>
-              {user}
+              {user[0]}
             </ListGroup.Item>
           ))}
         </ListGroup>

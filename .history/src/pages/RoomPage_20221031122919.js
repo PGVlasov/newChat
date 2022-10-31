@@ -39,8 +39,7 @@ export const RoomPage = () => {
 
   useEffect(() => {
     socket.on(ACTIONS.NEW_USER_RESPONSE, (data) => {
-      setUsers([...users, data]);
-      console.log(data);
+      setUsers([data]);
     });
   }, [users]);
 
@@ -76,8 +75,6 @@ export const RoomPage = () => {
 
     setValue("");
   };
-
-  console.log(users);
 
   if (sessionStorage.getItem("userName") === null) return <MyModalForGuest />;
 

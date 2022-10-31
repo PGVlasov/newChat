@@ -26,10 +26,10 @@ io.on("connection", (socket) => {
   socket.on(ACTIONS.JOIN, (config) => {
     const { room: roomID } = config;
     const clients = Array.from(io.sockets.adapter.rooms.get(roomID) || []);
-    const { rooms: joinedRooms } = socket;
-    if (Array.from(joinedRooms).includes(roomID)) {
-      return console.warn(`Already connected to room ${roomID}`);
-    }
+    // const { rooms: joinedRooms } = socket;
+    // if (Array.from(joinedRooms).includes(roomID)) {
+    //   return console.warn(`Already connected to room ${roomID}`);
+    // }
 
     clients.forEach((clientID) => {
       io.to(clientID).emit(ACTIONS.ADD_PEER, {
@@ -64,6 +64,7 @@ io.on("connection", (socket) => {
 
     const clients = Array.from(io.sockets.adapter.rooms.get(roomID) || []);
     //sens message only to clients from this room id
+    console.log("58", msg.author.authorName);
 
     io.to(clients).emit(ACTIONS.MESSAGE_RESPONSE, {
       data: msg,

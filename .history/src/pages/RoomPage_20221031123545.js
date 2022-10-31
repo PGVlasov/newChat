@@ -39,7 +39,7 @@ export const RoomPage = () => {
 
   useEffect(() => {
     socket.on(ACTIONS.NEW_USER_RESPONSE, (data) => {
-      setUsers([...users, data]);
+      setUsers(...users, data);
       console.log(data);
     });
   }, [users]);
