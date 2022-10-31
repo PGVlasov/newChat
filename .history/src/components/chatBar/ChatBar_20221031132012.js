@@ -1,12 +1,12 @@
 import { ListGroup } from "react-bootstrap";
 
-export const ChatBar = () => {
-  let users = [
-    { name: "user1" },
-    { name: "user2" },
-    { name: "user3" },
-    { name: "user4" },
-  ];
+export const ChatBar = ({ users }) => {
+  //   let users = [
+  //     { name: "user1" },
+  //     { name: "user2" },
+  //     { name: "user3" },
+  //     { name: "user4" },
+  //   ];
 
   if (!users) return <div>Пользователи подключаются...</div>;
   return (
@@ -17,7 +17,7 @@ export const ChatBar = () => {
         <ListGroup variant="flush" style={{ width: "50%", margin: "1rem" }}>
           {users.map((user) => (
             <ListGroup.Item action variant="success" key={Math.random()}>
-              {user.name}
+              {user}
             </ListGroup.Item>
           ))}
         </ListGroup>

@@ -57,6 +57,8 @@ export const RoomPage = () => {
       sendMessage();
     }
   };
+  let arr = [1, 2];
+  console.log("TEST", !arr.includes(1));
 
   const sendMessage = async () => {
     let day = new Date();
@@ -83,6 +85,8 @@ export const RoomPage = () => {
 
     setValue("");
   };
+
+  console.log(users);
 
   if (sessionStorage.getItem("userName") === null) return <MyModalForGuest />;
 
